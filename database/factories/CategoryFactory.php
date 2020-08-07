@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'userId' => function(){
+        'user_id' => function(){
         	return App\User::all()->random();
         },
     ];

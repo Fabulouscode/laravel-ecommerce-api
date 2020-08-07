@@ -8,13 +8,13 @@ use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
-        'categoryId' => function(){ return Category::all()->random(); },
+        'category_id' => function(){ return Category::all()->random(); },
         'name' => $faker->name,
         'details' => $faker->paragraph,
         'price' => $faker->numberBetween(100, 10000),
         'stock' => $faker->randomDigit,
         'discount' => $faker->numberBetween(2, 30),
-        'userId' => function(){
+        'user_id' => function(){
         	return App\User::all()->random();
         },
 
