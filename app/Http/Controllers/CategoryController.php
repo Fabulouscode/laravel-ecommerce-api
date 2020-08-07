@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Category\CategoryReource;
+use App\Http\Resources\Category\CategoryResource;
 use App\Model\Category;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return new CategoryReource($category);
+        return new CategoryResource($category);
     }
 
     /**
