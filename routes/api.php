@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+//CRUD route controller
+Route::apiResource('/categories', 'CategoryController');
+
+Route::apiResource('/products', 'ProductController');
+
+Route::group(['prefix' => 'products'], function () {
+    Route::apiResource('/{products}/review', 'ReviewController');
+});
+
