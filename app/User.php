@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Model\Product;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -39,6 +40,10 @@ class User extends Authenticatable
     ];
 
     public function categories(){
-        return $this->hasMany(Model\Category::class);
+        return $this->hasMany(Category::class);
+    }
+
+    public function products(){
+        return $this->hasMany(Product::class);
     }
 }

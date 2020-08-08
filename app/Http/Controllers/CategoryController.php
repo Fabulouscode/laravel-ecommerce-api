@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Category\CategoryCollection;
 use App\Http\Resources\Category\CategoryReource;
 use App\Http\Resources\Category\CategoryResource;
 use App\Model\Category;
@@ -16,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::all();
+        return new CategoryCollection (Category::all());
     }
 
     /**
