@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Http\Resources\Product\ProductCollection;
 use App\Http\Resources\Product\ProductResource;
 use App\Model\Product;
@@ -35,9 +36,18 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $product = new Product;
+        $product->name = $request->name;
+        $product->details = $request->details;
+        $product->stock = $request->stock;
+        $product->price = $request->price;
+        $product->discount = $request->discount;
+        $product->save();
+        // return response([
+        //     'data' => new ProductResource($product)
+        // ],Response::HTTP_CREATED);
     }
 
     /**
