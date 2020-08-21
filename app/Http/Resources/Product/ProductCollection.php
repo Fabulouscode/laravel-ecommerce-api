@@ -15,6 +15,7 @@ class ProductCollection extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'totalPrice' => round((1-($this->discount/100)) * $this->discount, 2),
             'rating' => $this->reviews->count() > 0 ?round($this->reviews->sum('star')/$this->reviews->count(), 2) : 'No rating yet',

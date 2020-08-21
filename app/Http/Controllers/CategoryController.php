@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return new CategoryCollection (Category::all());
+        return CategoryCollection::collection(Category::paginate(20));
     }
 
     /**
@@ -51,12 +51,13 @@ class CategoryController extends Controller
         $category->user_id = $request->user_id;
         $category->name = $request->name;
 
-        $category->save();
+       $category = $category->save();
 
-        if($category->save()){
+        if($category){
             return response()->json([
+                'status' => 'succes',
                 'message'=>'created',
-                'data'=>$category
+                'data'=> new CategoryResource($category)
         ],Response::HTTP_CREATED);
         }
     }
@@ -70,6 +71,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         return new CategoryResource($category);
+
     }
 
     /**
