@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CategorySeeder extends Seeder
+class DurationRateSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,6 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Model\Category::class, 10)->create();
+        factory(App\Model\DurationRate::class, 20)->create();
     }
-
 }

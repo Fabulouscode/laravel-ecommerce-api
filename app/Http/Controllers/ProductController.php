@@ -7,7 +7,7 @@ use App\Http\Resources\Product\ProductCollection;
 use App\Http\Resources\Product\ProductResource;
 use App\Model\Product;
 use Illuminate\Http\Request;
-
+use Symfony\Component\HttpFoundation\Response;
 class ProductController extends Controller
 {
     /**
@@ -36,18 +36,32 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'category_id' => 'required',
+            'name' => 'required',
+            'details' => 'required',
+            'stock' => 'required',
+            'price' => 'required',
+            'user_id' => 'required'
+        ]);
         $product = new Product;
+        $product->category_id = $request->category_id;
         $product->name = $request->name;
         $product->details = $request->details;
         $product->stock = $request->stock;
         $product->price = $request->price;
         $product->discount = $request->discount;
+        $product->user_id = $request->user_id;
         $product->save();
-        // return response([
-        //     'data' => new ProductResource($product)
-        // ],Response::HTTP_CREATED);
+            if($product->save()){
+                return response()->json([
+                    'message'=>'created',
+                    'data'=>$product
+            ],Response::HTTP_CREATED);
+        }
+
     }
 
     /**

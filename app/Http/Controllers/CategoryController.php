@@ -42,14 +42,23 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'name'=> 'required|unique:categories',
+        ]);
         $category = new Category();
+        $category->user_id = $request->user_id;
         $category->name = $request->name;
+
         $category->save();
-        // return response([
-        //     'data' => new CategoryResource($category);
-        // ],Response::HTTP_CREATED);
+
+        if($category->save()){
+            return response()->json([
+                'message'=>'created',
+                'data'=>$category
+        ],Response::HTTP_CREATED);
+        }
     }
 
     /**
@@ -83,7 +92,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        return $category;
     }
 
     /**

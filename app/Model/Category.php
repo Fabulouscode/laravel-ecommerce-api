@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public function user(){
+    public function User(){
        return $this->belongsTo(User::class);
     }
 }
