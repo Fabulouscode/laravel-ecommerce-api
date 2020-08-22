@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $fillable = ['category_id', 'name', 'details', 'price', 'stock', 'discount', 'user_id'];
     public function reviews()
     {
     	return $this->hasMany(Review::class);
@@ -15,4 +16,5 @@ class Product extends Model
     {
     	return $this->belongsTo(User::class);
     }
+
 }

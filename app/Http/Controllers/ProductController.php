@@ -56,9 +56,9 @@ class ProductController extends Controller
         $product->user_id = $request->user_id;
         $product->save();
             if($product->save()){
-                return response()->json([
+                return response([
                     'message'=>'created',
-                    'data'=>$product
+                    'data'=> new ProductResource($product)
             ],Response::HTTP_CREATED);
         }
 
@@ -95,7 +95,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        return response([
+            'status' => 'success',
+            'data' => new ProductResource($product)
+        ],Response::HTTP_CREATED);
     }
 
     /**
@@ -106,6 +110,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return response([
+            'status' => 'success'
+        ],Response::HTTP_OK);
     }
 }

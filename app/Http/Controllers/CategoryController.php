@@ -50,14 +50,13 @@ class CategoryController extends Controller
         $category = new Category();
         $category->user_id = $request->user_id;
         $category->name = $request->name;
-
-       $category = $category->save();
+        $category = $category->save();
 
         if($category){
-            return response()->json([
+            return response([
                 'status' => 'succes',
-                'message'=>'created',
-                'data'=> new CategoryResource($category)
+                'message'=>'Category created',
+                'data'=> $category
         ],Response::HTTP_CREATED);
         }
     }
@@ -94,7 +93,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        return $category;
+        $category->update($request->all());
+        return response([
+            'status' => 'success',
+            'data' => new CategoryResource($category)
+        ],Response::HTTP_CREATED);
     }
 
     /**
@@ -105,6 +108,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return response([
+            'status' => 'success'
+        ],Response::HTTP_OK);
     }
 }
