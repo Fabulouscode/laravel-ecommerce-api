@@ -14,7 +14,7 @@ class DurationRateController extends Controller
      */
     public function index()
     {
-        //
+        //return
     }
 
     /**
